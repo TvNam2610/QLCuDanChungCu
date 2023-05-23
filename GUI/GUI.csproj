@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2CA1E8B6-F384-4B56-AB2E-207E1680630F}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>GUI</RootNamespace>
+    <AssemblyName>GUI</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevComponents.DotNetBar2, Version=14.1.0.37, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\DotNetBar for Windows Forms\DevComponents.DotNetBar2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevComponents.Instrumentation, Version=14.1.0.37, Culture=neutral, PublicKeyToken=f90dc37c26666a67, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\DotNetBar for Windows Forms\DevComponents.Instrumentation.dll</HintPath>
+    </Reference>
+    <Reference Include="DevComponents.TreeGX, Version=14.1.0.37, Culture=neutral, PublicKeyToken=055db68f670cfeab, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\DotNetBar for Windows Forms\DevComponents.TreeGX.dll</HintPath>
+    </Reference>
+    <Reference Include="Guna.UI2">
+      <HintPath>..\..\Guna UI Framework Ultimate v2.0.0.1 + Keygen\Guna.UI-Framework-Lib-master\Guna.UI2 WinForms\.net 4.0\Guna.UI2.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="GUI_DangNhap.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI_DangNhap.Designer.cs">
+      <DependentUpon>GUI_DangNhap.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI_DichVu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI_DichVu.Designer.cs">
+      <DependentUpon>GUI_DichVu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI_DienNuoc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI_DienNuoc.Designer.cs">
+      <DependentUpon>GUI_DienNuoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI_Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI_Main.Designer.cs">
+      <DependentUpon>GUI_Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI_NguoiDan.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI_NguoiDan.Designer.cs">
+      <DependentUpon>GUI_NguoiDan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI_NhanVien.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI_NhanVien.Designer.cs">
+      <DependentUpon>GUI_NhanVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI_ThanhToanDichVu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI_ThanhToanDichVu.Designer.cs">
+      <DependentUpon>GUI_ThanhToanDichVu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GUI_ThanhToanDienNuoc.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI_ThanhToanDienNuoc.Designer.cs">
+      <DependentUpon>GUI_ThanhToanDienNuoc.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GUI_DangNhap.resx">
+      <DependentUpon>GUI_DangNhap.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI_DichVu.resx">
+      <DependentUpon>GUI_DichVu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI_DienNuoc.resx">
+      <DependentUpon>GUI_DienNuoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI_Main.resx">
+      <DependentUpon>GUI_Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI_NguoiDan.resx">
+      <DependentUpon>GUI_NguoiDan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI_NhanVien.resx">
+      <DependentUpon>GUI_NhanVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI_ThanhToanDichVu.resx">
+      <DependentUpon>GUI_ThanhToanDichVu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI_ThanhToanDienNuoc.resx">
+      <DependentUpon>GUI_ThanhToanDienNuoc.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BUS\BUS.csproj">
+      <Project>{3bbdd501-c634-44c2-85ff-c08ee2ecef52}</Project>
+      <Name>BUS</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DTO\DTO.csproj">
+      <Project>{51b75d18-9fab-4055-860b-ca3da230667d}</Project>
+      <Name>DTO</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\6372974_account_avatar_log in_login_register_icon.png" />
+    <None Include="Resources\6372974_account_avatar_log in_login_register_icon %281%29.png" />
+    <None Include="Resources\6372974_account_avatar_log in_login_register_icon %282%29.png" />
+    <None Include="Resources\2191536_key_login_pad_secret_secure_icon.png" />
+    <None Include="Resources\2191536_key_login_pad_secret_secure_icon %281%29.png" />
+    <None Include="Resources\1564534_customer_man_user_account_profile_icon.png" />
+    <None Include="Resources\3671803_closed_lock_icon.png" />
+    <None Include="Resources\172484_invisible_icon.png" />
+    <None Include="Resources\4280480_off_outlined_visibility_hide_invisible_icon.png" />
+    <None Include="Resources\1989012_building_skyscraper_icon.png" />
+    <None Include="Resources\1989012_building_skyscraper_icon %281%29.png" />
+    <None Include="Resources\1989012_building_skyscraper_icon %282%29.png" />
+    <Content Include="Resources\add.png" />
+    <Content Include="Resources\banner-sql-server.png" />
+    <None Include="Resources\bg-home.png" />
+    <Content Include="Resources\Building.GIF" />
+    <Content Include="Resources\Building.png" />
+    <Content Include="Resources\chuyen lop.png" />
+    <Content Include="Resources\Class3.png" />
+    <Content Include="Resources\DangKyDichVu.png" />
+    <Content Include="Resources\dangnhap.png" />
+    <Content Include="Resources\dangnhapcontext.png" />
+    <Content Include="Resources\dangxuat.png" />
+    <Content Include="Resources\dangxuatcontext.png" />
+    <Content Include="Resources\dantoc1.png" />
+    <Content Include="Resources\delete.png" />
+    <Content Include="Resources\delete2.png" />
+    <None Include="Resources\desktop-wallpaper-handpicked-building-backgrounds-buildings.jpg" />
+    <Content Include="Resources\DichVu.png" />
+    <Content Include="Resources\Dmatkhau.png" />
+    <Content Include="Resources\DN.png" />
+    <Content Include="Resources\doimatkhau.png" />
+    <Content Include="Resources\doimatkhaucontext.png" />
+    <Content Include="Resources\excel8.png" />
+    <Content Include="Resources\exit.png" />
+    <Content Include="Resources\exit1.png" />
+    <Content Include="Resources\Export.jpg" />
+    <None Include="Resources\High_resolution_wallpaper_background_ID_77700311003.jpg" />
+    <Content Include="Resources\Home.png" />
+    <Content Include="Resources\Home11.png" />
+    <Content Include="Resources\luu.png" />
+    <Content Include="Resources\muscule_car_128.png" />
+    <Content Include="Resources\muscule_car_256.png" />
+    <Content Include="Resources\nghenghiep.png" />
+    <Content Include="Resources\NgheNghiep2.png" />
+    <Content Include="Resources\NguoiDan.png" />
+    <Content Include="Resources\NguoiDan1.png" />
+    <Content Include="Resources\nguoidung.png" />
+    <Content Include="Resources\NhanVien1.png" />
+    <Content Include="Resources\pdf.png" />
+    <Content Include="Resources\phuchoi.png" />
+    <Content Include="Resources\phuchoidulieu.png" />
+    <None Include="Resources\png-clipart-login-computer-icons-login-button-miscellaneous-angle-thumbnail.png" />
+    <Content Include="Resources\Programs.png" />
+    <Content Include="Resources\QDdotuoi.png" />
+    <Content Include="Resources\QDSiSo.png" />
+    <Content Include="Resources\QDthangdiem.png" />
+    <Content Include="Resources\quanlynguoidung.png" />
+    <Content Include="Resources\QuyDinh.png" />
+    <Content Include="Resources\re.png" />
+    <Content Include="Resources\saoluu.png" />
+    <Content Include="Resources\saoluudulieu.png" />
+    <Content Include="Resources\save.png" />
+    <Content Include="Resources\SQL server.png" />
+    <Content Include="Resources\SugarwareZ-150.gif" />
+    <Content Include="Resources\TCGV.png" />
+    <Content Include="Resources\TCHS.png" />
+    <Content Include="Resources\thoat.png" />
+    <Content Include="Resources\tongiao.png" />
+    <Content Include="Resources\TraCuuNguoiDan.png" />
+    <Content Include="Resources\TraCuuNguoiDan1.png" />
+    <Content Include="Resources\TraCuuNhanVien.png" />
+    <Content Include="Resources\transform.png" />
+    <Content Include="Resources\transform2.png" />
+    <Content Include="Resources\TTPM.png" />
+    <Content Include="Resources\TTTH.png" />
+    <Content Include="Resources\WVista Home Premium.gif" />
+    <Content Include="Resources\WVista Home Premium.ico" />
+    <Content Include="Resources\WVista Home Premium.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
