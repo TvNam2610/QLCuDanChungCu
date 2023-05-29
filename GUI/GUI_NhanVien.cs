@@ -123,27 +123,7 @@ namespace GUI
             txtKeyword.Text = "";
         }
 
-        private void btnKetXuat_Click(object sender, EventArgs e)
-        {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Microsoft Word | *.docx";
-            saveFileDialog.Title = "Lưu thông tin người dân";
-            saveFileDialog.ShowDialog();
-            if (saveFileDialog.FileName != "")
-            {
-                try
-                {
-                    busnv.KetXuatWord(saveFileDialog.FileName);
-                    MessageBox.Show("Kết xuất thành công!");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Thông báo lỗi");
-                }
-
-            }
-
-        }
+       
 
         private void btnExcel_Click(object sender, EventArgs e)
         {
@@ -162,6 +142,33 @@ namespace GUI
                 {
                     MessageBox.Show(ex.Message, "Thông báo lỗi");
                 }
+            }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            reset();
+            GUI_NhanVien_Load(sender, e);
+        }
+
+        private void btnKetXuat_Click_1(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "Microsoft Word | *.docx";
+            saveFileDialog.Title = "Lưu thông tin nhân viên";
+            saveFileDialog.ShowDialog();
+            if (saveFileDialog.FileName != "")
+            {
+                try
+                {
+                    busnv.KetXuatWord(saveFileDialog.FileName);
+                    MessageBox.Show("Kết xuất thành công!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Thông báo lỗi");
+                }
+
             }
         }
     }

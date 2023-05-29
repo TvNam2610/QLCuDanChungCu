@@ -28,7 +28,7 @@ namespace DAL
 
         private DataProvider() { }
 
-        static readonly string connectionStr = ConfigurationManager.ConnectionStrings["SqlConnectionString"].ConnectionString;
+        string connectionStr = @"Data Source=DESKTOP-1OFH7OO\MYNAM_SERVER;Initial Catalog=QLChungCuPH;Integrated Security=True;TrustServerCertificate=True";
 
         public DataTable ExecuteQuery(string query, object[] parameters = null)
         {
@@ -59,5 +59,33 @@ namespace DAL
             }
             return dt;
         }
+        public int ExecuteNonQuery(string query, object[] parameters = null)
+        {
+            int dt = 0;
+            using (SqlConnection conn = new SqlConnection(connectionStr))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(query, conn);
+                if (parameters != null)
+                {
+                    string[] listPara = query.Split(' ');
+                    int i = 0;
+                    foreach (string param in listPara)
+                    {
+                        if (param.Contains('@'))
+                        {
+                            cmd.Parameters.AddWithValue(param, parameters[i]);
+                            i++;
+                        }
+                    }
+                }
+                dt = cmd.ExecuteNonQuery();
+
+                conn.Close();
+            }
+            return dt;
+        }
+
+
     }
 }

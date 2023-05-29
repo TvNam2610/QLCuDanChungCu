@@ -45,7 +45,7 @@ namespace GUI
             txtTenDichVu.Clear();
         } 
         private void btnThem_Click(object sender, EventArgs e)
-        {
+        {  
             try
             {
                 string madichvu = txtMaDichVu.Text;
@@ -65,11 +65,36 @@ namespace GUI
                 GUI_DichVu_Load(sender, e);
             }
         }
+        private void btnDangKyDV_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string madkdv = txtMaDKDV.Text;
+                string mach = cbMaCHDV.Text;
+                string dichvuDK = cbDicVu.SelectedValue.ToString();
+                DateTime ngayDK = DateTime.Parse(dtpNgayDangKiDV.Text);
+                DateTime ngayHetHan = DateTime.Parse(dtpNgayhetHanDV.Text);
+                DangKiDichVu dk = new DangKiDichVu(madkdv, mach, dichvuDK, ngayDK, ngayHetHan);
+                
+                busdv.addDangKiDichVu(dk);
+                MessageBox.Show("Đăng ký dịch vụ thành công!");
+                reset();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                GUI_DichVu_Load(sender, e);
+            }
+        }
 
         private void GUI_DichVu_Load(object sender, EventArgs e)
         {
             dgvDichVu.DataSource = busdv.getDichVu();
             dgvDangKyDichVu.DataSource = busdv.getDangKiDichVu();
+           
             cbDicVu.DataSource = busdv.getDichVu();
             cbDicVu.ValueMember = "MaDichVu";
             cbDicVu.DisplayMember = "TenDichVu";
@@ -125,46 +150,12 @@ namespace GUI
             dgvDichVu.DataSource = busdv.searchDichVu(keyWord);
             txtKeyword.Text = "";
         }
+       
 
-        private void btnKetXuat_Click(object sender, EventArgs e)
+        private void btnRefresh_Click(object sender, EventArgs e)
         {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Microsoft Word | *.docx";
-            saveFileDialog.Title = "Lưu thông tin dịch vụ";
-            saveFileDialog.ShowDialog();
-            if (saveFileDialog.FileName != "")
-            {
-                try
-                {
-                    busdv.KetXuatWord(saveFileDialog.FileName);
-                    MessageBox.Show("Kết xuất thành công!");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Thông báo lỗi");
-                }
-
-            }
-        }
-
-        private void btnExcel_Click(object sender, EventArgs e)
-        {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Filter = "Excel (*.xlsx)|*.xlsx";
-            saveFileDialog.Title = "Lưu thông tin dịch vụ";
-            saveFileDialog.ShowDialog();
-            if (saveFileDialog.FileName != "")
-            {
-                try
-                {
-                    busdv.XuatExcel(saveFileDialog.FileName);
-                    MessageBox.Show("Kết xuất thành công!");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message, "Thông báo lỗi");
-                }
-            }
+            reset();
+            GUI_DichVu_Load(sender, e);
         }
     }
 }

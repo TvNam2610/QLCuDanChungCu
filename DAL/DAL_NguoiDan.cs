@@ -12,7 +12,7 @@ namespace DAL
     {
         public DataTable getNguoiDan()
         {
-            string query = $"Select * from NguoiDan";
+            string query = $"SP_getNguoiDan";
             return DataProvider.Instance.ExecuteQuery(query);
         }
 

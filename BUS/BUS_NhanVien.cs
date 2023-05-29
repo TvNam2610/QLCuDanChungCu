@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace BUS
 {
@@ -19,19 +20,27 @@ namespace BUS
        
 
 
-        public void addNhanVien(NhanVien nhanvien)
+        public bool addNhanVien(NhanVien nhanvien)
         {
-            dalnv.addNhanVien(nhanvien);
+
+            try
+            {
+                return dalnv.addNhanVien(nhanvien);
+            }
+            catch
+            {
+                return false;
+            }
         }
 
-        public void editNhanVien(NhanVien nhanvien)
+        public bool editNhanVien(NhanVien nhanvien)
         {
-            dalnv.editNhanVien(nhanvien);
+            return dalnv.editNhanVien(nhanvien);
         }
 
-        public void deleteNhanVien(string manhanvien)
+        public bool deleteNhanVien(string manhanvien)
         {
-            dalnv.deleteNhanVien(manhanvien);
+            return dalnv.deleteNhanVien(manhanvien);
         }
 
         public DataTable searchNhanVien(string keyword)
@@ -48,42 +57,20 @@ namespace BUS
             return dalnv.getQuanLy();
         }
 
+
+
         public void KetXuatWord(string exportPath)
         {
-            List<NhanVien> nhanVienList = GetAll(dalnv.getNhanVien());
-            List<object> objectList = new List<object>();
-            foreach (NhanVien nv in nhanVienList)
-            {
-                objectList.Add((object)nv);
-            }
-
-            WordHelper.ExportToWord(objectList, "Template\\NhanVien_Template.docx", exportPath);
+            WordHelper.ExportToWord(dalnv.getNhanVien(), "Template\\NhanVien_Template.docx", exportPath,
+                new List<string>() { "MaNV" });
         }
 
-
-        public List<NhanVien> GetAll(DataTable tbnhanVien)
-        {
-            List<NhanVien> listNV = new List<NhanVien>();
-            foreach (DataRow row in tbnhanVien.Rows)
-            {
-                NhanVien nv = new NhanVien()
-                {
-                    MaNV = row["MaNV"].ToString(),
-                    TenNV = row["TenNV"].ToString(),
-                    DiaChi = row["DiaChi"].ToString(),
-                    SoDienThoai = row["SoDienThoai"].ToString(),
-                    Email = row["Email"].ToString(),
-                    MachucVu = row["MaChucVu"].ToString(),
-                    MaNQL = row["MaNQL"].ToString()
-                };
-                listNV.Add(nv);
-            }
-            return listNV;
-        }
 
         public void XuatExcel(string filePath)
         {
-            ExcelHelper.WriteExcelFile(filePath, dalnv.getNhanVien());
+            ExcelHelper.WriteExcelFile(filePath, "Template\\NhanVien_Template.xlsx", dalnv.getNhanVien());
         }
+
+        
     }
 }

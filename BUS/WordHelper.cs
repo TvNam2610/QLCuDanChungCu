@@ -2,17 +2,102 @@
 using Novacode;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
+using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BUS
 {
-    public static class WordHelper
+    internal static class WordHelper
     {
-        public static void ExportToWord(List<object> data, string templatePath, string exportPath)
+        public static void ExportToWord2(DataTable data, string templatePath, string exportPath,int tongtien, List<string> unwantedValues = null)
         {
+
+            if (unwantedValues == null)
+            {
+                unwantedValues = new List<string>();
+            }
+            // Tạo tài liệu Word mới
+            using (DocX document = DocX.Load(templatePath))
+            {
+                DateTime dateNow = DateTime.Now;
+
+                // tìm đối tượng Paragraph chứa trường dữ liệu
+                Paragraph p = document.Paragraphs.FirstOrDefault(paragraph => paragraph.Text.Contains("<<QuanLy>>"));
+                Paragraph day = document.Paragraphs.FirstOrDefault(paragraph => paragraph.Text.Contains("{day}"));
+                Paragraph month = document.Paragraphs.FirstOrDefault(paragraph => paragraph.Text.Contains("{month}"));
+                Paragraph year = document.Paragraphs.FirstOrDefault(paragraph => paragraph.Text.Contains("{year}"));
+                Paragraph tongtien1 = document.Paragraphs.FirstOrDefault(paragraph => paragraph.Text.Contains("<<TongTien>>"));
+                Paragraph bangChu = document.Paragraphs.FirstOrDefault(paragraph => paragraph.Text.Contains("<<BangChu>>"));
+
+
+                // thay thế chuỗi trường dữ liệu bằng giá trị thật
+                p.ReplaceText("<<QuanLy>>", "Trần Đình Hoàn");
+                day.ReplaceText("{day}", dateNow.Day.ToString());
+                month.ReplaceText("{month}", dateNow.Month.ToString());
+                year.ReplaceText("{year}", dateNow.Year.ToString());
+                tongtien1.ReplaceText("<<TongTien>>", tongtien.ToString() + " đồng");
+                
+
+
+
+                // Lấy đối tượng bảng từ tài liệu Word
+                Table table = document.Tables[1];
+
+
+                // Lặp qua các dữ liệu trong danh sách
+
+                List<string> columns = new List<string>();
+                foreach (DataColumn column in data.Columns)
+                {
+                    columns.Add(column.ColumnName);
+                }
+
+                int index = 1;
+                foreach (DataRow item in data.Rows)
+                {
+                    // Thêm một dòng mới vào bảng
+                    Row row = table.InsertRow();
+                    int i = 1;
+
+                    row.Cells[0].Paragraphs[0].InsertText(index++.ToString());
+                    row.Cells[0].Width = 80;
+
+                    foreach (string col in columns)
+                    {
+
+                        if (unwantedValues.Contains(col))
+                        {
+                            continue;
+                        }
+
+                        if (item[col] is DateTime)
+                        {
+                            DateTime dateValue = (DateTime)item[col];
+                            string formattedDate = dateValue.ToString("dd/MM/yyyy");
+                            row.Cells[i++].Paragraphs[0].InsertText(formattedDate);
+                            continue;
+                        }
+
+                        row.Cells[i++].Paragraphs[0].InsertText(item[col].ToString());
+
+
+                    }
+                }
+                document.SaveAndOpenFile(exportPath);
+            }
+        }
+        public static void ExportToWord(DataTable data, string templatePath, string exportPath, List<string> unwantedValues = null)
+        {
+            if (unwantedValues == null)
+            {
+                unwantedValues = new List<string>();
+            }
             // Tạo tài liệu Word mới
             using (DocX document = DocX.Load(templatePath))
             {
@@ -25,70 +110,57 @@ namespace BUS
                 Paragraph year = document.Paragraphs.FirstOrDefault(paragraph => paragraph.Text.Contains("{year}"));
 
                 // thay thế chuỗi trường dữ liệu bằng giá trị thật
-                p.ReplaceText("<<QuanLy>>", "Nguyễn Văn A");
+                p.ReplaceText("<<QuanLy>>", "Trần Văn Nam");
                 day.ReplaceText("{day}", dateNow.Day.ToString());
                 month.ReplaceText("{month}", dateNow.Month.ToString());
                 year.ReplaceText("{year}", dateNow.Year.ToString());
 
                 // Lấy đối tượng bảng từ tài liệu Word
                 Table table = document.Tables[1];
-                int i = 1;
+
 
                 // Lặp qua các dữ liệu trong danh sách
 
+                List<string> columns = new List<string>();
+                foreach (DataColumn column in data.Columns)
+                {
+                    columns.Add(column.ColumnName);
+                }
 
-                foreach (var item in data)
+                int index = 1;
+                foreach (DataRow item in data.Rows)
                 {
                     // Thêm một dòng mới vào bảng
                     Row row = table.InsertRow();
+                    int i = 1;
 
-                    // Sử dụng các thuộc tính của đối tượng để điền dữ liệu vào bảng
-                    if (item is NguoiDan)
+                    row.Cells[0].Paragraphs[0].InsertText(index++.ToString());
+                    row.Cells[0].Width = 80;
+
+                    foreach (string col in columns)
                     {
-                        NguoiDan nd = (NguoiDan)item;
-                        row.Cells[0].Paragraphs[0].InsertText(i.ToString());
-                        row.Cells[0].Width = 80;
+
+                        if (unwantedValues.Contains(col))
+                        {
+                            continue;
+                        }
+
+                        if (item[col] is DateTime)
+                        {
+                            DateTime dateValue = (DateTime)item[col];
+                            string formattedDate = dateValue.ToString("dd/MM/yyyy");
+                            row.Cells[i++].Paragraphs[0].InsertText(formattedDate);
+                            continue;
+                        }
+
+                        row.Cells[i++].Paragraphs[0].InsertText(item[col].ToString());
 
 
-                        row.Cells[1].Paragraphs[0].InsertText(nd.HoTen);
-
-                        row.Cells[2].Paragraphs[0].InsertText(nd.NgaySinh.ToShortDateString());
-
-                        row.Cells[3].Paragraphs[0].InsertText(nd.GioiTinh);
-
-                        row.Cells[4].Paragraphs[0].InsertText(nd.SoDienThoai);
-
-                        row.Cells[5].Paragraphs[0].InsertText(nd.DiaChi);
-
-                        i++;
-
-                    }
-                    else if (item is NhanVien)
-                    {
-                        NhanVien nv = (NhanVien)item;
-                        row.Cells[0].Paragraphs[0].InsertText(i.ToString());
-                        row.Cells[0].Width = 80;
-
-
-                        row.Cells[1].Paragraphs[0].InsertText(nv.TenNV);
-
-                        row.Cells[2].Paragraphs[0].InsertText(nv.DiaChi);
-
-                        row.Cells[3].Paragraphs[0].InsertText(nv.SoDienThoai);
-
-                        row.Cells[4].Paragraphs[0].InsertText(nv.Email);
-
-                        row.Cells[5].Paragraphs[0].InsertText(nv.MachucVu);
-
-                        row.Cells[6].Paragraphs[0].InsertText(nv.MaNQL);
-
-                        i++;
                     }
                 }
                 document.SaveAndOpenFile(exportPath);
             }
         }
-
         public static void SaveAndOpenFile(this DocX doc, string filename = "BaoCao.docx")
         {
             /*string thuMuc = "temp";

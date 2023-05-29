@@ -25,11 +25,10 @@ namespace DAL
 
         public void addDienNuoc(DienNuoc diennuoc)
         {
-            string query = $"SP_AddDienNuoc @maDN , @month , @year , @soDienTieuThu , @soNuocTieuThu , @maCH";
+            string query = $"SP_AddDienNuoc   @month , @year , @soDienTieuThu , @soNuocTieuThu , @maCH";
             DataProvider.Instance.
                 ExecuteQuery(query, new object[]
                 {
-                    diennuoc.MaDN,
                     diennuoc.Month,
                     diennuoc.Year,
                     diennuoc.SoDienTieuThu,
@@ -39,11 +38,10 @@ namespace DAL
         }
         public void editDienNuoc(DienNuoc diennuoc)
         {
-            string query = $"SP_EditDienNuoc @maDN , @month , @year , @soDienTieuThu , @soNuocTieuThu , @maCH";
+            string query = $"SP_EditDienNuoc @month , @year , @soDienTieuThu , @soNuocTieuThu , @maCH";
             DataProvider.Instance.
                 ExecuteQuery(query, new object[]
                 {
-                    diennuoc.MaDN,
                     diennuoc.Month,
                     diennuoc.Year,
                     diennuoc.SoDienTieuThu,
@@ -59,7 +57,7 @@ namespace DAL
 
         public DataTable SearchDienNuoc(string keyword)
         {
-            string query = "SP_SearchDichVu @key ";
+            string query = "SP_SearchDienNuoc @key ";
 
             return DataProvider.Instance.ExecuteQuery(query, new object[] { keyword });
         }

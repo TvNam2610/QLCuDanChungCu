@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    public class HoaDonDienNuoc
+    public class HoaDonDichVu
     {
-        public string MaTT { get; set; }
-        public string MaGia { get; set; }
-        public string MaDN { get; set; }
+        public string madkdv { get; set; }
         public DateTime NgayTT { get; set; }
 
         public float TongTien { get; set; }
@@ -18,12 +16,10 @@ namespace DTO
         public string trangthai { get; set; }
 
 
-        public HoaDonDienNuoc() { }
-        public HoaDonDienNuoc(string MaTT, string MaGia, string MaDN, DateTime NgayTT, float TongTien, string trangthai)
+        public HoaDonDichVu() { }
+        public HoaDonDichVu(string madkdv , DateTime NgayTT, float TongTien, string trangthai)
         {
-            this.MaTT = MaTT;
-            this.MaGia = MaGia;
-            this.MaDN = MaDN;
+            this.madkdv = madkdv;
             this.NgayTT = NgayTT;
             this.TongTien = TongTien;
             this.trangthai = trangthai;

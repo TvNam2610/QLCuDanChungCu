@@ -53,40 +53,14 @@ namespace BUS
 
         public void KetXuatWord(string exportPath)
         {
-            List<NguoiDan> nguoiDanList = GetAll(dalND.getNguoiDan());
-            List<object> objectList = new List<object>();
-            //CHUYỂN TỪ LIST NGƯỜI DÂN SANG LIST OBJECT ĐỂ EXPORT
-            foreach (NguoiDan kh in nguoiDanList)
-            {
-                objectList.Add((object)kh);
-            }
-
-            WordHelper.ExportToWord(objectList, "Template\\NguoiDan_Template.docx", exportPath);
+            WordHelper.ExportToWord(dalND.getNguoiDan(), "Template\\NguoiDan_Template.docx", exportPath, 
+                new List<string>() {"MaND" , "MaCH"});
         }
 
-
-        public List<NguoiDan> GetAll(DataTable tbnguoiDan)
-        {
-            List<NguoiDan> listND = new List<NguoiDan>();
-            foreach (DataRow row in tbnguoiDan.Rows)
-            {
-                NguoiDan nd = new NguoiDan()
-                {
-                    MaND = row["MaND"].ToString(),
-                    HoTen = row["HoTen"].ToString(),
-                    NgaySinh = (DateTime)row["NgaySinh"],
-                    GioiTinh = row["GioiTinh"].ToString(),
-                    SoDienThoai = row["SoDienThoai"].ToString(),
-                    DiaChi = row["DiaChi"].ToString(),
-                };
-                listND.Add(nd);
-            }
-            return listND;
-        }
 
         public void XuatExcel(string filePath)
         {
-            ExcelHelper.WriteExcelFile(filePath, dalND.getNguoiDan());
+            ExcelHelper.WriteExcelFile(filePath, "Template\\NguoiDan_Template.xlsx", dalND.getNguoiDan());
         }
     }
 }

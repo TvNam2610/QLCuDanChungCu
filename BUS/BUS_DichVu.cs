@@ -25,18 +25,31 @@ namespace BUS
             return daldv.getCanHo();
         }
 
-        public void addDichVu(DichVu dichvu)
+        public bool addDangKiDichVu(DangKiDichVu dk)
         {
-            daldv.addDichVu(dichvu);
+            
+            return daldv.addDangKiDichVu(dk);
+            
         }
-        public void editDichVu(DichVu dichvu)
+        public bool addDichVu(DichVu dichvu)
         {
-            daldv.editDichVu(dichvu);
+            try
+            {
+                return daldv.addDichVu(dichvu);
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public bool editDichVu(DichVu dichvu)
+        {
+            return daldv.editDichVu(dichvu);
         }
 
-        public void deleteDichVu(string madichvu)
+        public bool deleteDichVu(string madichvu)
         {
-            daldv.deleteDichVu(madichvu);
+            return daldv.deleteDichVu(madichvu);
         }
 
         public DataTable searchDichVu(string keyword)
@@ -45,17 +58,14 @@ namespace BUS
         }
 
 
-        public void KetXuatWord(string exportPath)
+        /*public void KetXuatWord(string exportPath)
         {
-            List<DichVu> dichVuList = GetAll(daldv.getDichVu());
-            List<object> objectList = new List<object>();
-            foreach (DichVu dv in dichVuList)
+            WordHelper.ExportToWord(daldv.getDichVu(), "Template\\KhachHang_Template.docx", exportPath, new List<string>()
             {
-                objectList.Add((object)dv);
-            }
-
-            WordHelper.ExportToWord(objectList, "Template\\Dichvu_Template.docx", exportPath);
-        }
+                "MaKhachHang",
+                "CCCD"
+            });
+        }*/
 
 
         public List<DichVu> GetAll(DataTable tbdichvu)
@@ -77,7 +87,7 @@ namespace BUS
 
         public void XuatExcel(string filePath)
         {
-            ExcelHelper.WriteExcelFile(filePath, daldv.getDichVu());
+            //ExcelHelper.WriteExcelFile(filePath, daldv.getDichVu());
         }
     }
 }

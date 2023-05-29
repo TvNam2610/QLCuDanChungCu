@@ -28,11 +28,11 @@ namespace DAL
             return DataProvider.Instance.ExecuteQuery(query);
         }
 
-        public void addNhanVien(NhanVien nhanvien)
+        public bool addNhanVien(NhanVien nhanvien)
         {
             string query = $"SP_AddNhanVien @maNhanVien , @tenNV , @diaChi , @soDienThoai , @email ,  @maChucVu , @maNQL";
-            DataProvider.Instance.
-                ExecuteQuery(query, new object[]
+            return DataProvider.Instance.
+                ExecuteNonQuery(query, new object[]
                 {
                     nhanvien.MaNV,
                     nhanvien.TenNV,
@@ -41,13 +41,13 @@ namespace DAL
                     nhanvien.Email,
                     nhanvien.MachucVu,
                     nhanvien.MaNQL
-                });
+                }) > 0;
         }
-        public void editNhanVien(NhanVien nhanvien)
+        public bool editNhanVien(NhanVien nhanvien)
         {
             string query = $"SP_EditNhanVien @maNhanVien , @tenNV , @diaChi , @soDienThoai , @email ,  @maChucVu , @maNQL";
-            DataProvider.Instance.
-                ExecuteQuery(query, new object[]
+            return DataProvider.Instance.
+                ExecuteNonQuery(query, new object[]
                 {
                     nhanvien.MaNV,
                     nhanvien.TenNV,
@@ -56,12 +56,12 @@ namespace DAL
                     nhanvien.Email,
                     nhanvien.MachucVu,
                     nhanvien.MaNQL
-                });
+                }) > 0;
         }
-        public void deleteNhanVien(string manhanvien)
+        public bool deleteNhanVien(string manhanvien)
         {
             string query = $"Delete NhanVien where MaNV = '{manhanvien}'";
-            DataProvider.Instance.ExecuteQuery(query);
+            return DataProvider.Instance.ExecuteNonQuery(query) > 0;
         }
 
         public DataTable SearchNhanVien(string keyword)
